@@ -1,0 +1,23 @@
+@import './reset.css';
+
+body {
+  background-color: pink;
+}
+
+.main-section {
+  lost-utility: clearfix;
+  & > div {
+    lost-column: 1/2;
+    text-align: center;
+  }
+}
+
+.centered-section {
+  lost-center: 960px;
+  & > div {
+    border: solid black 1px;
+    lost-column: 9/10;
+    text-align: center;
+  }
+}
+
