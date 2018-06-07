@@ -1,6 +1,16 @@
 {
   "name": "absentus-demo",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/index.html",
+    "dev": "parcel serve src/index.html"
+  },
+  "devDependencies": {
+    "autoprefixer": "^8.6.0",
+    "babel-core": "^6.26.3",
+    "lost": "^8.2.1",
+    "postcss-nested": "^3.0.0"
+  }
 }
