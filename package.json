@@ -12,5 +12,11 @@
     "babel-core": "^6.26.3",
     "lost": "^8.2.1",
     "postcss-nested": "^3.0.0"
+  },
+  "dependencies": {
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
   }
 }
