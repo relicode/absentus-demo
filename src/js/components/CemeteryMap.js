@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { connect } from 'react-redux'
 
 
-export default class CemeteryMap extends Component {
+class CemeteryMap extends Component {
   constructor() {
     super()
     this.state = {
@@ -17,7 +18,7 @@ export default class CemeteryMap extends Component {
   }
 
   render() {
-    const { accessToken, lat, lon, zoom } = this.state
+    const { accessToken, lat, lon, zoom } = this.props.map
     const position = [lat, lon]
     return (
       <Map center={position} zoom={zoom} onClick={this.handleClick.bind(this)}>
@@ -39,7 +40,15 @@ export default class CemeteryMap extends Component {
   handleClick(ev) {
     const latLon = [ev.latlon.lat, ev.latlon.lng]
     return latLon
-    // console.log([lat, lon])
+    // console.log([lat, lon]) // For development
   }
 }
+
+const mapStateToProps = (state /*, ownProps */) => {
+  return {
+    map: state.map,
+  }
+}
+
+export default connect(mapStateToProps)(CemeteryMap)
 

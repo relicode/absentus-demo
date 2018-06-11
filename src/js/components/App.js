@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
 import sendAlert from '../actions/alerts'
+import { SET_LOCATION } from '../actions/types'
 
 
 class App extends Component {
@@ -14,7 +15,18 @@ class App extends Component {
           <CemeteryMap />
         </div>
         <div className="controls">
-          <div className="controls__button"><Ionicon icon="md-pin" fontSize="75px" /></div>
+          <div className="controls__button" onClick={() => {
+            this.props.dispatch({
+              type: SET_LOCATION,
+              location: {
+                lat: 1,
+                lon: 1,
+                zoom: 5,
+              }
+            })
+          }}>
+            <Ionicon icon="md-pin" fontSize="75px" />
+          </div>
           <div className="controls__button"><Ionicon icon="md-calendar" fontSize="75px" /></div>
           <div className="controls__button"><Ionicon icon="md-hammer" fontSize="75px" /></div>
           <div className="controls__button"><Ionicon icon="md-star" fontSize="75px" /></div>
@@ -37,6 +49,7 @@ const mapStateToProps = (state /*, ownProps */) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    dispatch,
     sendAlert: (msg) => {
       dispatch(sendAlert(msg))
     }
