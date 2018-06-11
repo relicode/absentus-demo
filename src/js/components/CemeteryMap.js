@@ -11,8 +11,8 @@ export default class CemeteryMap extends Component {
       lon: 24.91838931960289, // Hietaniemi Cemetery
       zoom: 18,
     }
-    setTimeout(() => {
-    
+    setInterval(() => {
+      // this.setState({zoom: this.state.zoom - 1})
     }, 1000)
   }
 
