@@ -4,6 +4,10 @@ body {
   background-color: pink;
 }
 
+.leaflet-container {
+  height: 480px;
+}
+
 .main-section {
   lost-utility: clearfix;
   & > div {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import CemeteryMap from './CemeteryMap'
 import sendAlert from '../actions/alerts'
 
 
@@ -9,8 +10,8 @@ class App extends Component {
     return (
       <div>
         <section className="main-section">
+          <div><CemeteryMap /></div>
           <div>This should not change</div>
-          <div id="app">Not working</div>
         </section>
         <section className="centered-section">
           <div onClick={this.handleClick.bind(this)}>
