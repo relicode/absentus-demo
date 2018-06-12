@@ -1,26 +1,35 @@
 @import './reset.css';
 
 body {
-  background-color: pink;
+  background-color: #eeeeee;
 }
 
-.leaflet-container {
-  height: 480px;
+.app {
+  display: flex;
+  flex-direction: column;
 }
 
-.main-section {
-  lost-utility: clearfix;
-  & > div {
-    lost-column: 1/2;
+.controls {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 1em;
+  &__button {
+    lost-column: 1/3;
+    cursor: pointer;
+    height: 100px;
+    /* pointer-events: none; */
     text-align: center;
+    &:hover {
+      background-color: #dddddd;
+    }
   }
 }
 
-.centered-section {
-  lost-center: 960px;
+.map {
   & > div {
-    border: solid black 1px;
-    lost-column: 9/10;
+    height: 300px;
     text-align: center;
   }
 }

@@ -1,23 +1,11 @@
 import React, { Component } from 'react'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { connect } from 'react-redux'
 
 
-export default class CemeteryMap extends Component {
-  constructor() {
-    super()
-    this.state = {
-      accessToken: 'pk.eyJ1IjoiYW5zc2loZXJyYW5lbiIsImEiOiJjamkxand2dG8wbG9uM3FwaWtzMmcweXF4In0.wMtJBkK3g1ZuSzg7gaXPDw',
-      lat: 60.16880318693753, // Hietaniemi Cemetery
-      lon: 24.91838931960289, // Hietaniemi Cemetery
-      zoom: 18,
-    }
-    setTimeout(() => {
-    
-    }, 1000)
-  }
-
+class CemeteryMap extends Component {
   render() {
-    const { accessToken, lat, lon, zoom } = this.state
+    const { accessToken, lat, lon, zoom } = this.props.map
     const position = [lat, lon]
     return (
       <Map center={position} zoom={zoom} onClick={this.handleClick.bind(this)}>
@@ -39,7 +27,15 @@ export default class CemeteryMap extends Component {
   handleClick(ev) {
     const latLon = [ev.latlon.lat, ev.latlon.lng]
     return latLon
-    // console.log([lat, lon])
+    // console.log([lat, lon]) // For development
   }
 }
+
+const mapStateToProps = (state /*, ownProps */) => {
+  return {
+    map: state.map,
+  }
+}
+
+export default connect(mapStateToProps)(CemeteryMap)
 

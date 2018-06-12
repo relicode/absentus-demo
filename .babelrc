@@ -1,10 +1,7 @@
 {
-  "env": {
-    "server": {
-      "plugins": ["react-imported-component/babel", "babel-plugin-dynamic-import-node"]
-    },
-    "client": {
-      "plugins": ["react-imported-component/babel"]
-    }
-  }
+  "presets": ["env"],
+  "plugins": [
+    ["transform-object-rest-spread", { "useBuiltIns": true }]
+  ]
 }
+
