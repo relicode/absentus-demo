@@ -1,3 +1,6 @@
+import Block from './block'
+
+
 const COUNTRY = 'country'
 const CITY = 'city'
 const CEMETERY = 'cemetery'
@@ -48,25 +51,23 @@ const cemeteryMap = {
 }
 
 export default class Plot {
-  constructor({country, city, cemetery, block, plot}) {
-    if (!country || !city || !cemetery || !block || !plot) {
-      throw new Error('Country, city, cemetery, block and plot are required.')
+  constructor(block, plotNr) {
+    if (!(block instanceof Block) || !plotNr) {
+      throw new Error('Block and plotNr are required.')
     }
-    this.country = country
-    this.city = city
-    this.cemetery = cemetery
     this.block = block
-    this.plot = plot
+    this.plotNr = plotNr
   }
 
   getIsgn() {
-    const { country, city, cemetery, block, plot } = this
+    const { block, plotNr } = this
+    const { country, city, cemetery } = block
     return (
       pad(countryMap[country], COUNTRY) +
       pad(cityMap[country][city], CITY) +
       pad(cemeteryMap[city][cemetery], CEMETERY) +
-      pad(block, BLOCK) +
-      pad(plot, PLOT)
+      pad(block.blockNr, BLOCK) +
+      pad(plotNr, PLOT)
     )
   }
 }
