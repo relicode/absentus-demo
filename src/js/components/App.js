@@ -3,9 +3,19 @@ import { connect } from 'react-redux'
 
 import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
-import sendAlert from '../actions/alerts'
 import { SET_LOCATION } from '../actions/types'
 
+
+function backToSquareOne() {
+  this.props.dispatch({
+    type: SET_LOCATION,
+    location: {
+      lat: 1,
+      lon: 1,
+      zoom: 5,
+    }
+  })
+}
 
 class App extends Component {
   render() {
@@ -15,16 +25,7 @@ class App extends Component {
           <CemeteryMap />
         </div>
         <div className="controls">
-          <div className="controls__button" onClick={() => {
-            this.props.dispatch({
-              type: SET_LOCATION,
-              location: {
-                lat: 1,
-                lon: 1,
-                zoom: 5,
-              }
-            })
-          }}>
+          <div className="controls__button" onClick={backToSquareOne.bind(this)}>
             <Ionicon icon="md-pin" fontSize="75px" />
           </div>
           <div className="controls__button"><Ionicon icon="md-calendar" fontSize="75px" /></div>
@@ -36,25 +37,15 @@ class App extends Component {
       </div>
     )
   }
-  handleClick() {
-    this.props.sendAlert('not your default alert')
-  }
 }
 
-const mapStateToProps = (state /*, ownProps */) => {
-  return {
-    alerts: state.alerts,
-  }
-}
+// const mapStateToProps = (state, ownProps) => {}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
-    sendAlert: (msg) => {
-      dispatch(sendAlert(msg))
-    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(null, mapDispatchToProps)(App)
 
