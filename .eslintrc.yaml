@@ -2,6 +2,7 @@ env:
   browser: true
   es6: true
   node: true
+  jest/globals: true
 extends: 'eslint:recommended'
 parser: babel-eslint
 parserOptions:
@@ -12,8 +13,14 @@ parserOptions:
 plugins:
   - import
   - react
+  - jest
 rules:
   indent: [error, 2, SwitchCase: 1]
+  jest/no-disabled-tests: warn
+  jest/no-focused-tests: error
+  jest/no-identical-title: error
+  jest/prefer-to-have-length: warn
+  jest/valid-expect: error
   linebreak-style: [error, unix]
   quotes: [2, single]
   react/jsx-uses-react: 2
