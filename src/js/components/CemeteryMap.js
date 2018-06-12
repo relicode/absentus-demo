@@ -10,7 +10,7 @@ class CemeteryMap extends Component {
     return (
       <Map center={position} zoom={zoom} onClick={this.handleClick.bind(this)}>
         <TileLayer
-          attribution={JSON.stringify(this.props.map)}/*"&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/
+          attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
           id="mapbox.streets"
           accessToken={accessToken}

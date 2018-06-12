@@ -16,9 +16,7 @@ export default function map(state = initialState, action) {
   const { lat, lon, zoom } = typeof location === 'object' ? location : {}
   switch (type) {
     case SET_LOCATION:
-      console.log(SET_LOCATION + ' action.')
-      console.log(action)
-      return Object.assign(state, {
+      return Object.assign({}, state, {
         lat: typeof lat === 'number' ? lat : initialLat,
         lon: typeof lon === 'number' ? lon : initialLon,
         zoom: typeof zoom === 'number' ? zoom : initialZoom,
