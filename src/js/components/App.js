@@ -3,17 +3,12 @@ import { connect } from 'react-redux'
 
 import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
-import { SET_LOCATION } from '../actions/types'
+import { SET_LOCATION_ORIGINAL } from '../actions/types'
 
 
 function backToSquareOne() {
   this.props.dispatch({
-    type: SET_LOCATION,
-    location: {
-      lat: 1,
-      lon: 1,
-      zoom: 5,
-    }
+    type: SET_LOCATION_ORIGINAL,
   })
 }
 

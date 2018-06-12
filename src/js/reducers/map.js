@@ -1,4 +1,4 @@
-import { SET_LOCATION } from '../actions/types'
+import { SET_LOCATION, SET_LOCATION_ORIGINAL } from '../actions/types'
 
 const initialLat = 60.16880318693753 // Hietaniemi Cemetery
 const initialLon = 24.91838931960289 // Hietaniemi Cemetery
@@ -16,11 +16,19 @@ export default function map(state = initialState, action) {
   const { lat, lon, zoom } = typeof location === 'object' ? location : {}
   switch (type) {
     case SET_LOCATION:
-      return Object.assign({}, state, {
-        lat: typeof lat === 'number' ? lat : initialLat,
-        lon: typeof lon === 'number' ? lon : initialLon,
-        zoom: typeof zoom === 'number' ? zoom : initialZoom,
-      })
+      return {
+        ...state,
+        lat,
+        lon,
+        zoom,
+      }
+    case SET_LOCATION_ORIGINAL:
+      return {
+        ...state,
+        lat: initialLat,
+        lon: initialLon,
+        zoom: initialZoom,
+      }
     default:
       return state
   }
