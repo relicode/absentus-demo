@@ -1,5 +1,6 @@
 import { SET_LOCATION, SET_LOCATION_ORIGINAL } from '../actions/types'
 
+
 const initialLat = 60.16880318693753 // Hietaniemi Cemetery
 const initialLon = 24.91838931960289 // Hietaniemi Cemetery
 const initialZoom = 18

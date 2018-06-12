@@ -25,9 +25,9 @@ class CemeteryMap extends Component {
   }
 
   handleClick(ev) {
-    const latLon = [ev.latlon.lat, ev.latlon.lng]
+    const latLon = [ev.latlng.lat, ev.latlng.lng]
+    console.log(latLon) // eslint-disable-line no-console
     return latLon
-    // console.log([lat, lon]) // For development
   }
 }
 
