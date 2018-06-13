@@ -3,6 +3,7 @@ import { Map, Marker, Polygon, Popup, TileLayer } from 'react-leaflet'
 import { connect } from 'react-redux'
 
 import Block from '../utils/block'
+import { MODAL_TOGGLE } from '../actions/types'
 
 
 const colors = ['green', 'red', 'yellow']
@@ -38,7 +39,10 @@ class CemeteryMap extends Component {
             positions={block.coordinates}
             color={getRandomColor()} key={block.blockNr}
             onClick={() => {
-              alert('eeh')
+              this.props.dispatch({
+                type: MODAL_TOGGLE,
+                visible: true,
+              })
             }}
           />
         ))}
@@ -61,5 +65,9 @@ const mapStateToProps = (state /*, ownProps */) => {
   }
 }
 
-export default connect(mapStateToProps)(CemeteryMap)
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CemeteryMap)
 
