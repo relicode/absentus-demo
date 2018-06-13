@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import {
+  Map,
+  Marker,
+  Popup,
+  TileLayer,
+} from 'react-leaflet'
 import { connect } from 'react-redux'
 
 
@@ -14,7 +19,7 @@ class CemeteryMap extends Component {
     const { accessToken, lat, lon, zoom } = this.props.map
     const position = [lat, lon]
     return (
-      <Map center={position} zoom={zoom} onClick={this.handleClick}>
+      <Map center={position} zoom={zoom} onClick={this.handleClick} viewport={{}}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"

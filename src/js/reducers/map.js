@@ -13,8 +13,8 @@ const initialState = {
 }
 
 export default function map(state = initialState, action) {
-  const { type, location } = action
-  const { lat, lon, zoom } = typeof location === 'object' ? location : {}
+  const { type, location = {} } = action
+  const { lat, lon, zoom } = location
   switch (type) {
     case SET_LOCATION:
       return {
