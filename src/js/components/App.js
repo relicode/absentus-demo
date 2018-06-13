@@ -6,13 +6,13 @@ import Ionicon from 'react-ionicons'
 import { SET_LOCATION_ORIGINAL } from '../actions/types'
 
 
-function backToSquareOne() {
-  this.props.dispatch({
-    type: SET_LOCATION_ORIGINAL,
-  })
-}
-
 class App extends Component {
+  backToSquareOne = () => {
+    this.props.dispatch({
+      type: SET_LOCATION_ORIGINAL,
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -20,7 +20,7 @@ class App extends Component {
           <CemeteryMap />
         </div>
         <div className="controls">
-          <div className="controls__button" onClick={backToSquareOne.bind(this)}>
+          <div className="controls__button" onClick={this.backToSquareOne}>
             <Ionicon icon="md-pin" fontSize="75px" />
           </div>
           <div className="controls__button"><Ionicon icon="md-calendar" fontSize="75px" /></div>
