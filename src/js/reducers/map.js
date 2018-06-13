@@ -3,7 +3,7 @@ import { SET_LOCATION, SET_LOCATION_ORIGINAL } from '../actions/types'
 
 const initialLat = 60.16880318693753 // Hietaniemi Cemetery
 const initialLon = 24.91838931960289 // Hietaniemi Cemetery
-const initialZoom = 18
+const initialZoom = 19
 
 const initialState = {
   accessToken: 'pk.eyJ1IjoiYW5zc2loZXJyYW5lbiIsImEiOiJjamkxand2dG8wbG9uM3FwaWtzMmcweXF4In0.wMtJBkK3g1ZuSzg7gaXPDw',
