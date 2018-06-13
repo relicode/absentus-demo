@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "parcel build src/index.html",
-    "dev": "parcel serve src/index.html",
+    "build": "yarn compile-data; parcel build src/index.html",
+    "compile-data": "yaml2json src/data/cemeteries.yaml > src/data/cemeteries.json",
+    "dev": "yarn compile-data; parcel serve src/index.html",
+    "lint": "eslint src",
     "test": "jest"
   },
   "devDependencies": {
@@ -19,7 +21,8 @@
     "jest": "^23.1.0",
     "lost": "^8.2.1",
     "postcss-nested": "^3.0.0",
-    "regenerator-runtime": "^0.11.1"
+    "regenerator-runtime": "^0.11.1",
+    "yaml2json": "^1.0.2"
   },
   "dependencies": {
     "leaflet": "^1.3.1",

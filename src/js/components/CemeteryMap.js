@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import {
-  Map,
-  Marker,
-  Popup,
-  TileLayer,
-} from 'react-leaflet'
+import { Map, Marker, Polygon, Popup, TileLayer } from 'react-leaflet'
 import { connect } from 'react-redux'
 
+import Block from '../utils/block'
+
+
+const colors = ['green', 'red', 'yellow']
+const getRandomColor = () => (
+  colors[Math.floor(Math.random() * colors.length)]
+)
 
 class CemeteryMap extends Component {
   handleClick = (ev) => {
@@ -31,14 +33,31 @@ class CemeteryMap extends Component {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
+        {this.props.blocks.map((block) => (
+          <Polygon
+            positions={block.coordinates}
+            color={getRandomColor()} key={block.blockNr}
+            onClick={() => {
+              alert('eeh')
+            }}
+          />
+        ))}
       </Map>
     )
   }
 }
 
 const mapStateToProps = (state /*, ownProps */) => {
+  const { country, city, cemetery } = state.chosenCemetery
   return {
     map: state.map,
+    blocks: state.cemeteries[country][city][cemetery].map((b) => (
+      new Block({
+        country, city, cemetery,
+        coordinates: b,
+        blockNr: Math.floor(Math.random() * 5000) + 1 // horrible hack, TODO: fix this
+      })
+    )) || []
   }
 }
 
