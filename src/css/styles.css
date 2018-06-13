@@ -27,6 +27,10 @@ body {
   }
 }
 
+.ReactModal__Overlay {
+  z-index: 16777216;
+}
+
 .map {
   & > div {
     height: 300px;
