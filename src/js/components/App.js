@@ -35,6 +35,16 @@ class App extends Component {
           <h2>Simple centered modal</h2>
           <h2>Simple centered modal</h2>
           <h2>Simple centered modal</h2>
+          <ul>
+            <li>Task #1</li>
+            <li>Task #1</li>
+            <li>Task #1</li>
+            <li>Task #1</li>
+            <li>Task #1</li>
+            <li>Task #1</li>
+            <li>Task #1</li>
+            <li>Task #1</li>
+          </ul>
         </Modal>
         <div className="map">
           <CemeteryMap />

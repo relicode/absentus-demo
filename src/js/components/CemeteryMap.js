@@ -19,10 +19,15 @@ class CemeteryMap extends Component {
   }
 
   render() {
-    const { accessToken, lat, lon, zoom } = this.props.map
+    const { accessToken, lat, lon } = this.props.map
     const position = [lat, lon]
     return (
-      <Map center={position} zoom={zoom} onClick={this.handleClick} viewport={{}}>
+      <Map
+        center={position}
+        onClick={this.handleClick}
+        viewport={{}}
+        {...this.props.map}
+      >
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
