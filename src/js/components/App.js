@@ -54,8 +54,8 @@ class App extends Component {
             <Ionicon icon="md-pin" {...ioniconProps} />
           </div>
           <div className="controls__button"><Ionicon icon="md-calendar" {...ioniconProps} /></div>
-          <div className="controls__button"><Ionicon icon="md-hammer" {...ioniconProps} /></div>
-          <div className="controls__button"><Ionicon icon="md-star" {...ioniconProps} /></div>
+          <div className="controls__button"><Ionicon icon="md-funnel" {...ioniconProps} /></div>
+          <div className="controls__button"><Ionicon icon="md-search" {...ioniconProps} /></div>
           <div className="controls__button"><Ionicon icon="md-leaf" {...ioniconProps} /></div>
           <div className="controls__button"><Ionicon icon="md-cog" {...ioniconProps} /></div>
         </div>
