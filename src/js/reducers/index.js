@@ -4,6 +4,7 @@ import cemeteries from './cemeteries'
 import chosenCemetery from './chosen-cemetery'
 import map from './map'
 import modal from './modal'
+import plots from './plots'
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   chosenCemetery,
   map,
   modal,
+  plots,
 })
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map, Marker, Polygon, Popup, TileLayer } from 'react-leaflet'
+import { Circle, Map, Marker, Polygon, Popup, TileLayer } from 'react-leaflet'
 import { connect } from 'react-redux'
 
 import Block from '../utils/block'
@@ -18,6 +18,31 @@ class CemeteryMap extends Component {
     return latLon
   }
 
+  renderBlocks() {
+    return this.props.blocks.map((block) => (
+      <Polygon
+        positions={block.coordinates}
+        color={getRandomColor()} key={block.blockNr}
+        onClick={() => {
+          this.props.dispatch({
+            type: MODAL_TOGGLE,
+            visible: true,
+          })
+        }}
+      />
+    ))
+  }
+
+  renderPlots() {
+    return Object.entries(this.props.plots).map((plot) => (
+      <Marker position={[plot[1][0], plot[1][1]]} key={String(plot[1][0]) + String(plot[1][1])}>
+        <Popup>
+          A pretty CSS3 popup. <br /> Easily customizable.
+        </Popup>
+      </Marker>
+    ))
+  }
+
   render() {
     const { accessToken, lat, lon } = this.props.map
     const position = [lat, lon]
@@ -34,23 +59,13 @@ class CemeteryMap extends Component {
           id="mapbox.streets"
           accessToken={accessToken}
         />
-        <Marker position={position}>
+        <Circle center={position} radius={5}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
-        </Marker>
-        {this.props.blocks.map((block) => (
-          <Polygon
-            positions={block.coordinates}
-            color={getRandomColor()} key={block.blockNr}
-            onClick={() => {
-              this.props.dispatch({
-                type: MODAL_TOGGLE,
-                visible: true,
-              })
-            }}
-          />
-        ))}
+        </Circle>
+        {this.renderBlocks()}
+        {this.renderPlots()}
       </Map>
     )
   }
@@ -66,7 +81,8 @@ const mapStateToProps = (state /*, ownProps */) => {
         coordinates: b,
         blockNr: Math.floor(Math.random() * 5000) + 1 // horrible hack, TODO: fix this
       })
-    )) || []
+    )) || [],
+    plots: state.plots[country][city][cemetery],
   }
 }
 
