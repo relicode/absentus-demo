@@ -10,25 +10,19 @@ body {
 }
 
 .controls {
-  display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  justify-content: center;
   padding-top: 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   &__button {
-    lost-column: 1/3;
     cursor: pointer;
-    height: 100px;
-    /* pointer-events: none; */
+    flex: 33.3333%;
+    height: 200px;
     text-align: center;
     &:hover {
       background-color: #dddddd;
     }
   }
-}
-
-.ReactModal__Overlay {
-  z-index: 16777216;
 }
 
 .map {
