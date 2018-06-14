@@ -1,4 +1,5 @@
 import Block from './block'
+import Task from './task'
 
 
 const COUNTRY = 'country'
@@ -51,12 +52,27 @@ const cemeteryMap = {
 }
 
 export default class Plot {
-  constructor(block, plotNr) {
-    if (!(block instanceof Block) || !plotNr) {
-      throw new Error('Block and plotNr are required.')
+  tasks = []
+  taskCounter = 0
+
+  constructor({ block, plotNr, location, notes = [], resident = null }) {
+    if (!(block instanceof Block) || !plotNr || !(Array.isArray(location))) {
+      throw new Error('Block, plotNr and location are required.')
     }
     this.block = block
     this.plotNr = plotNr
+    this.location = location
+    this.notes = notes
+    this.resident = resident
+  }
+
+  addTask(type, description, completed = false) {
+    this.tasks.push(new Task({
+      completed,
+      description,
+      type,
+    }))
+    this.taskCounter += 1
   }
 
   getIsgn() {

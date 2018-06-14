@@ -1,4 +1,6 @@
 export default class Block {
+  plots = []
+  plotCounter = 1
   constructor({country, city, cemetery, coordinates, blockNr}) {
     if (!country || !city || !cemetery || !coordinates || !blockNr) {
       throw new Error('Country, city, cemetery, coordinates and blockNr are required.')
@@ -9,5 +11,14 @@ export default class Block {
     this.coordinates = coordinates
     this.blockNr = blockNr
   }
+  addPlot(type, description, completed = false) {
+    this.tasks.push(new Task({
+      completed,
+      description,
+      type,
+    }))
+    this.taskCounter += 1
+  }
+
 }
 

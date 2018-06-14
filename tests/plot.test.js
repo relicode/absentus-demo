@@ -15,8 +15,14 @@ const block = new Block({
   blockNr: 1
 })
 
-test('Plot gets instanciated with proper values', () => {
-  const plot = new Plot(block, 100)
+test('Plot gets instanciated with proper values and provides an ISGN.', () => {
+  const plot = new Plot({
+    block,
+    plotNr: 100,
+    location: [60.16874514706719, 24.918160289525986],
+    resident: 'Väinö-Klementti Ihalainen',
+    notes: 'Some notes about this plot here.'
+  })
   expect(plot.getIsgn()).toBe('358000910010001000100')
 })
 
