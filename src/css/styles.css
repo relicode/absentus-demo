@@ -25,38 +25,6 @@ body {
   }
 }
 
-.ReactModal {
-  &__Overlay {
-    z-index: 16777216;
-    transition: opacity 500ms ease-in-out;
-    opacity: 0;
-
-    &--after-open {
-      opacity: 1;
-    }
-
-    &--before-close {
-      opacity: 0;
-    }
-  }
-
-  &__Content {
-    transition: all 500ms ease-in-out;
-    transform: translateY(30px);
-    opacity: 0;
-
-    &--after-open {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    &--before-close {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-  }
-}
-
 .map {
   & > div {
     height: 300px;
