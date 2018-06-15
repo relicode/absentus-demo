@@ -42,7 +42,14 @@ class CemeteryMap extends Component {
         position={[plot[1].location[0], plot[1].location[1]]}
         key={String(plot[1].block) + String(plot[1].plotNr)}
       >
-        { plot[1].resident ? <Popup>{plot[1].resident}</Popup> : null }
+        { plot[1].resident ? (
+          <Popup>
+            {plot[1].resident}
+            {plot[1].tasks.map((task) => (
+              <p key={task}>{task}</p>
+            ))}
+          </Popup>
+        ) : null }
       </Marker>
     ))
   }

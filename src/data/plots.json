@@ -11,7 +11,10 @@
           ],
           "notes": "",
           "resident": "Andy Suonsilmä",
-          "tasks": []
+          "tasks": [
+            "WATER_PLANTS",
+            "ADJUST_HEADSTONE"
+          ]
         },
         {
           "block": 1,
@@ -44,7 +47,9 @@
           ],
           "notes": "",
           "resident": "J-P \"Juha-Pekka\" Grönblom",
-          "tasks": []
+          "tasks": [
+            "WATER_PLANTS"
+          ]
         },
         {
           "block": 1,
@@ -55,7 +60,9 @@
           ],
           "notes": "",
           "resident": "Jaana Nusbaum-Hetukka",
-          "tasks": []
+          "tasks": [
+            "WATER_PLANTS"
+          ]
         },
         {
           "block": 1,
@@ -88,7 +95,9 @@
           ],
           "notes": "",
           "resident": null,
-          "tasks": []
+          "tasks": [
+            "WATER_PLANTS"
+          ]
         },
         {
           "block": 1,
@@ -132,7 +141,9 @@
           ],
           "notes": "",
           "resident": "Jupe the Kallonmurskaaja",
-          "tasks": []
+          "tasks": [
+            "ADJUST_HEADSTONE"
+          ]
         },
         {
           "block": 2,
