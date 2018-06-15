@@ -3,6 +3,7 @@ import { Circle, Map, Marker, Polygon, Popup, TileLayer } from 'react-leaflet'
 import { connect } from 'react-redux'
 
 import Block from '../utils/block'
+import Plot from '../utils/plot'
 import { MODAL_TOGGLE } from '../actions/types'
 
 
@@ -37,10 +38,11 @@ class CemeteryMap extends Component {
 
   renderPlots() {
     return Object.entries(this.props.plots).map((plot) => (
-      <Marker position={[plot[1][0], plot[1][1]]} key={String(plot[1][0]) + String(plot[1][1])}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
+      <Marker
+        position={[plot[1].location[0], plot[1].location[1]]}
+        key={String(plot[1].block) + String(plot[1].plotNr)}
+      >
+        { plot[1].resident ? <Popup>{plot[1].resident}</Popup> : null }
       </Marker>
     ))
   }
@@ -84,7 +86,9 @@ const mapStateToProps = (state /*, ownProps */) => {
         blockNr: e[0],
       })
     )) || [],
-    plots: state.plots[country][city][cemetery],
+    plots: state.plots[country][city][cemetery].map((plot) => (
+      new Plot(plot)
+    )),
   }
 }
 

@@ -1,4 +1,3 @@
-import Block from './block'
 import Task from './task'
 
 
@@ -56,7 +55,7 @@ export default class Plot {
   taskCounter = 0
 
   constructor({ block, plotNr, location, notes = [], resident = null }) {
-    if (!(block instanceof Block) || !plotNr || !(Array.isArray(location))) {
+    if (!(block) || !plotNr || !(Array.isArray(location))) {
       throw new Error('Block, plotNr and location are required.')
     }
     this.block = block
