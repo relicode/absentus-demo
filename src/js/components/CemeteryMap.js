@@ -24,10 +24,12 @@ class CemeteryMap extends Component {
         positions={block.coordinates}
         color={getRandomColor()} key={block.blockNr}
         onClick={() => {
+          /*
           this.props.dispatch({
             type: MODAL_TOGGLE,
             visible: true,
           })
+          */
         }}
       />
     ))
@@ -75,11 +77,11 @@ const mapStateToProps = (state /*, ownProps */) => {
   const { country, city, cemetery } = state.chosenCemetery
   return {
     map: state.map,
-    blocks: state.cemeteries[country][city][cemetery].map((b) => (
+    blocks: Object.entries(state.cemeteries[country][city][cemetery]).map((e) => (
       new Block({
         country, city, cemetery,
-        coordinates: b,
-        blockNr: Math.floor(Math.random() * 5000) + 1 // horrible hack, TODO: fix this
+        coordinates: e[1],
+        blockNr: e[0],
       })
     )) || [],
     plots: state.plots[country][city][cemetery],

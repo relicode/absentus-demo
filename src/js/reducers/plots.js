@@ -1,6 +1,8 @@
-import initialState from '../../data/plots.json'
+import plots from '../../data/plots.json'
 // import {  } from '../actions/types'
 
+
+const initialState = plots
 
 export default function cemeteries(state = initialState, action) {
   const { type } = action
