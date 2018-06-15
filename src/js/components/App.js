@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
-import { MODAL_TOGGLE, SET_LOCATION_ORIGINAL } from '../actions/types'
+import { MAP_FILTER, MODAL_TOGGLE, SET_LOCATION_ORIGINAL } from '../actions/types'
 
 
 class App extends Component {
@@ -18,6 +18,12 @@ class App extends Component {
     this.props.dispatch({
       type: MODAL_TOGGLE,
       visible: false,
+    })
+  }
+
+  toggleMapFilter= () => {
+    this.props.dispatch({
+      type: MAP_FILTER,
     })
   }
 
@@ -54,7 +60,9 @@ class App extends Component {
             <Ionicon icon="md-pin" {...ioniconProps} />
           </div>
           <div className="controls__button"><Ionicon icon="md-calendar" {...ioniconProps} /></div>
-          <div className="controls__button"><Ionicon icon="md-funnel" {...ioniconProps} /></div>
+          <div className="controls__button" onClick={this.toggleMapFilter}>
+            <Ionicon icon="md-funnel" {...ioniconProps} />
+          </div>
           <div className="controls__button"><Ionicon icon="md-search" {...ioniconProps} /></div>
           <div className="controls__button"><Ionicon icon="md-leaf" {...ioniconProps} /></div>
           <div className="controls__button"><Ionicon icon="md-cog" {...ioniconProps} /></div>

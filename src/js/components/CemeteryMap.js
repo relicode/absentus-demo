@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Block from '../utils/block'
 import Plot from '../utils/plot'
-import { MODAL_TOGGLE } from '../actions/types'
+// import { MODAL_TOGGLE } from '../actions/types'
 
 
 const colors = ['green', 'red', 'yellow']
@@ -37,12 +37,29 @@ class CemeteryMap extends Component {
   }
 
   renderPlots() {
+    if (this.props.mapFilter === 'PLOT_WITH_TASKS') {
+      return Object.entries(this.props.plots).map((plot) => (
+        plot[1].tasks.length ? (
+          <Marker
+            position={[plot[1].location[0], plot[1].location[1]]}
+            key={String(plot[1].block) + String(plot[1].plotNr)}
+          >
+            <Popup>
+              {plot[1].resident}
+              {plot[1].tasks.map((task) => (
+                <p key={task}>{task}</p>
+              ))}
+            </Popup>
+          </Marker>
+        ) : null
+      ))
+    }
     return Object.entries(this.props.plots).map((plot) => (
       <Marker
         position={[plot[1].location[0], plot[1].location[1]]}
         key={String(plot[1].block) + String(plot[1].plotNr)}
       >
-        { plot[1].resident ? (
+        { plot[1].resident || plot[1].tasks.length ? (
           <Popup>
             {plot[1].resident}
             {plot[1].tasks.map((task) => (
@@ -70,9 +87,9 @@ class CemeteryMap extends Component {
           id="mapbox.streets"
           accessToken={accessToken}
         />
-        <Circle center={position} radius={5}>
+        <Circle center={position} radius={3}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            You are<br />here.
           </Popup>
         </Circle>
         {this.renderBlocks()}
@@ -86,6 +103,7 @@ const mapStateToProps = (state /*, ownProps */) => {
   const { country, city, cemetery } = state.chosenCemetery
   return {
     map: state.map,
+    mapFilter: state.mapFilter,
     blocks: Object.entries(state.cemeteries[country][city][cemetery]).map((e) => (
       new Block({
         country, city, cemetery,
