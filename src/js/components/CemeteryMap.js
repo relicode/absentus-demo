@@ -3,7 +3,8 @@ import { Circle, Map, Marker, Polygon, Popup, TileLayer } from 'react-leaflet'
 import { connect } from 'react-redux'
 
 import Block from '../utils/block'
-import { MODAL_TOGGLE } from '../actions/types'
+import Plot from '../utils/plot'
+// import { MODAL_TOGGLE } from '../actions/types'
 
 
 const colors = ['green', 'red', 'yellow']
@@ -21,24 +22,51 @@ class CemeteryMap extends Component {
   renderBlocks() {
     return this.props.blocks.map((block) => (
       <Polygon
-        positions={block.coordinates}
+        positions={block.positions}
         color={getRandomColor()} key={block.blockNr}
         onClick={() => {
+          /*
           this.props.dispatch({
             type: MODAL_TOGGLE,
             visible: true,
           })
+          */
         }}
       />
     ))
   }
 
   renderPlots() {
+    if (this.props.mapFilter === 'PLOT_WITH_TASKS') {
+      return Object.entries(this.props.plots).map((plot) => (
+        plot[1].tasks.length ? (
+          <Marker
+            position={[plot[1].location[0], plot[1].location[1]]}
+            key={String(plot[1].block) + String(plot[1].plotNr)}
+          >
+            <Popup>
+              {plot[1].resident}
+              {plot[1].tasks.map((task) => (
+                <p key={task}>{task}</p>
+              ))}
+            </Popup>
+          </Marker>
+        ) : null
+      ))
+    }
     return Object.entries(this.props.plots).map((plot) => (
-      <Marker position={[plot[1][0], plot[1][1]]} key={String(plot[1][0]) + String(plot[1][1])}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
+      <Marker
+        position={[plot[1].location[0], plot[1].location[1]]}
+        key={String(plot[1].block) + String(plot[1].plotNr)}
+      >
+        { plot[1].resident || plot[1].tasks.length ? (
+          <Popup>
+            {plot[1].resident}
+            {plot[1].tasks.map((task) => (
+              <p key={task}>{task}</p>
+            ))}
+          </Popup>
+        ) : null }
       </Marker>
     ))
   }
@@ -59,9 +87,9 @@ class CemeteryMap extends Component {
           id="mapbox.streets"
           accessToken={accessToken}
         />
-        <Circle center={position} radius={5}>
+        <Circle center={position} radius={3}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            You are<br />here.
           </Popup>
         </Circle>
         {this.renderBlocks()}
@@ -73,16 +101,30 @@ class CemeteryMap extends Component {
 
 const mapStateToProps = (state /*, ownProps */) => {
   const { country, city, cemetery } = state.chosenCemetery
+  const blocks = Object.entries(state.cemeteries[country][city][cemetery]).map((block) => (
+    new Block({
+      country, city, cemetery,
+      positions: block[1].positions,
+      blockNr: block[0],
+    })
+  ))
+  const plots = Object.entries(state.cemeteries[country][city][cemetery]).map((block) => (
+    Object.entries(block[1].plots).map((plot) => {
+      return new Plot({
+        ...plot[1],
+        plotNr: plot[0],
+        block: block[0],
+      })
+    })
+  )).reduce((prev, curr) => (
+    prev.concat(curr)
+  ))
+
   return {
     map: state.map,
-    blocks: state.cemeteries[country][city][cemetery].map((b) => (
-      new Block({
-        country, city, cemetery,
-        coordinates: b,
-        blockNr: Math.floor(Math.random() * 5000) + 1 // horrible hack, TODO: fix this
-      })
-    )) || [],
-    plots: state.plots[country][city][cemetery],
+    mapFilter: state.mapFilter,
+    blocks,
+    plots,
   }
 }
 

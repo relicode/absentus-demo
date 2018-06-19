@@ -1,4 +1,3 @@
-import Block from './block'
 import Task from './task'
 
 
@@ -55,8 +54,8 @@ export default class Plot {
   tasks = []
   taskCounter = 0
 
-  constructor({ block, plotNr, location, notes = [], resident = null }) {
-    if (!(block instanceof Block) || !plotNr || !(Array.isArray(location))) {
+  constructor({ block, plotNr, location, notes = [], resident = null, tasks = [] }) {
+    if (!(block) || !plotNr || !(Array.isArray(location))) {
       throw new Error('Block, plotNr and location are required.')
     }
     this.block = block
@@ -64,8 +63,10 @@ export default class Plot {
     this.location = location
     this.notes = notes
     this.resident = resident
+    this.tasks = tasks
   }
 
+  /*
   addTask(type, description, completed = false) {
     this.tasks.push(new Task({
       completed,
@@ -74,6 +75,7 @@ export default class Plot {
     }))
     this.taskCounter += 1
   }
+  */
 
   getIsgn() {
     const { block, plotNr } = this
