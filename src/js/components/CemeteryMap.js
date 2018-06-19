@@ -22,7 +22,7 @@ class CemeteryMap extends Component {
   renderBlocks() {
     return this.props.blocks.map((block) => (
       <Polygon
-        positions={block.coordinates}
+        positions={block.positions}
         color={getRandomColor()} key={block.blockNr}
         onClick={() => {
           /*
@@ -101,19 +101,30 @@ class CemeteryMap extends Component {
 
 const mapStateToProps = (state /*, ownProps */) => {
   const { country, city, cemetery } = state.chosenCemetery
+  const blocks = Object.entries(state.cemeteries[country][city][cemetery]).map((block) => (
+    new Block({
+      country, city, cemetery,
+      positions: block[1].positions,
+      blockNr: block[0],
+    })
+  ))
+  const plots = Object.entries(state.cemeteries[country][city][cemetery]).map((block) => (
+    Object.entries(block[1].plots).map((plot) => {
+      return new Plot({
+        ...plot[1],
+        plotNr: plot[0],
+        block: block[0],
+      })
+    })
+  )).reduce((prev, curr) => (
+    prev.concat(curr)
+  ))
+
   return {
     map: state.map,
     mapFilter: state.mapFilter,
-    blocks: Object.entries(state.cemeteries[country][city][cemetery]).map((e) => (
-      new Block({
-        country, city, cemetery,
-        coordinates: e[1],
-        blockNr: e[0],
-      })
-    )) || [],
-    plots: state.plots[country][city][cemetery].map((plot) => (
-      new Plot(plot)
-    )),
+    blocks,
+    plots,
   }
 }
 
