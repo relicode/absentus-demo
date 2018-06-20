@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Block from '../utils/block'
 import Plot from '../utils/plot'
-// import { MODAL_TOGGLE } from '../actions/types'
+import { MAP_SET_ZOOM_LEVEL } from '../actions/types'
 
 
 const getBlockColor = (block) => {
@@ -42,6 +42,7 @@ class CemeteryMap extends Component {
   }
 
   renderPlots() {
+    if (this.props.map.zoom <= 18) return null
     if (this.props.mapFilter === 'PLOT_WITH_TASKS') {
       return Object.entries(this.props.plots).map((plot) => (
         plot[1].tasks.length ? (
@@ -83,6 +84,12 @@ class CemeteryMap extends Component {
       <Map
         center={position}
         onClick={this.handleClick}
+        onZoomend={(ev) => {
+          this.props.dispatch({
+            type: MAP_SET_ZOOM_LEVEL,
+            zoomLevel: ev.target._zoom,
+          })
+        }}
         {...this.props.map}
       >
         <TileLayer

@@ -1,4 +1,8 @@
-import { SET_LOCATION, SET_LOCATION_ORIGINAL } from '../actions/types'
+import {
+  MAP_SET_LOCATION,
+  MAP_SET_LOCATION_ORIGINAL,
+  MAP_SET_ZOOM_LEVEL,
+} from '../actions/types'
 
 
 const initialLat = 60.16880318693753 // Hietaniemi Cemetery
@@ -15,17 +19,22 @@ const initialState = {
 }
 
 export default function map(state = initialState, action) {
-  const { type, location = {} } = action
+  const { type, location = {}, zoomLevel } = action
   const { lat, lon, zoom } = location
   switch (type) {
-    case SET_LOCATION:
+    case MAP_SET_ZOOM_LEVEL:
+      return {
+        ...state,
+        zoom: zoomLevel,
+      }
+    case MAP_SET_LOCATION:
       return {
         ...state,
         lat,
         lon,
         zoom,
       }
-    case SET_LOCATION_ORIGINAL:
+    case MAP_SET_LOCATION_ORIGINAL:
       return {
         ...state,
         lat: initialLat,

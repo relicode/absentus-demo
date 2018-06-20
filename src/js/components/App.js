@@ -5,13 +5,17 @@ import { connect } from 'react-redux'
 import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
 import Menu from './Menu'
-import { MAP_FILTER, MODAL_TOGGLE, SET_LOCATION_ORIGINAL } from '../actions/types'
+import {
+  MAP_FILTER,
+  MAP_SET_LOCATION_ORIGINAL,
+  MODAL_TOGGLE
+} from '../actions/types'
 
 
 class App extends Component {
   backToSquareOne = () => {
     this.props.dispatch({
-      type: SET_LOCATION_ORIGINAL,
+      type: MAP_SET_LOCATION_ORIGINAL,
     })
   }
 
