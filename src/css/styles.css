@@ -10,22 +10,6 @@ body {
   flex-direction: column;
 }
 
-.controls {
-  padding-top: 1em;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  &__button {
-    cursor: pointer;
-    flex: 33.3333%;
-    height: 100px;
-    text-align: center;
-    &:hover {
-      background-color: #dddddd;
-    }
-  }
-}
-
 .map {
   & > div {
     height: 600px;
