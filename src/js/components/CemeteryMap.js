@@ -7,10 +7,15 @@ import Plot from '../utils/plot'
 // import { MODAL_TOGGLE } from '../actions/types'
 
 
-const colors = ['green', 'red', 'yellow']
-const getRandomColor = () => (
-  colors[Math.floor(Math.random() * colors.length)]
-)
+const getBlockColor = (block) => {
+  if (block.tasks.filter((task) => task.urgent).length) {
+    return 'red'
+  }
+  if (block.tasks.length) {
+    return 'yellow'
+  }
+  return 'green'
+}
 
 class CemeteryMap extends Component {
   handleClick = (ev) => {
@@ -23,7 +28,7 @@ class CemeteryMap extends Component {
     return this.props.blocks.map((block) => (
       <Polygon
         positions={block.positions}
-        color={getRandomColor()} key={block.blockNr}
+        color={getBlockColor(block)} key={block.blockNr}
         onClick={() => {
           /*
           this.props.dispatch({
@@ -78,7 +83,6 @@ class CemeteryMap extends Component {
       <Map
         center={position}
         onClick={this.handleClick}
-        viewport={{}}
         {...this.props.map}
       >
         <TileLayer
