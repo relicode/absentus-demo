@@ -40,6 +40,7 @@ export default function map(state = initialState, action) {
         lat: initialLat,
         lon: initialLon,
         zoom: initialZoom,
+        viewport: {},
       }
     default:
       return state
