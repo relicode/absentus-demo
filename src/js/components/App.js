@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
+import Menu from './Menu'
 import { MAP_FILTER, MODAL_TOGGLE, SET_LOCATION_ORIGINAL } from '../actions/types'
 
 
@@ -29,8 +30,21 @@ class App extends Component {
 
   render() {
     const ioniconProps = { fontSize: '75px' }
+    const menuIoniconProps = { fontSize: '1.15em' }
     return (
       <div className="app">
+        <Menu right>
+          <p onClick={this.toggleMapFilter}><Ionicon icon="md-funnel" {...menuIoniconProps} />&nbsp;Filter plots</p>
+          <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...menuIoniconProps} />&nbsp;Return to center</p>
+          <p>Item 3</p>
+          <p>Item 4</p>
+          <p>Item 5</p>
+          <p>Item 6</p>
+          <p>Item 7</p>
+          <p>Item 8</p>
+          <p>Item 9</p>
+          <p>Item 10</p>
+        </Menu>
         <Modal open={this.props.showModal} onClose={this.handleCloseModal} center>
           <h1>&nbsp;</h1>
           <h2>Simple centered modal</h2>
@@ -55,6 +69,7 @@ class App extends Component {
         <div className="map">
           <CemeteryMap />
         </div>
+        {/*
         <div className="controls">
           <div className="controls__button" onClick={this.backToSquareOne}>
             <Ionicon icon="md-pin" {...ioniconProps} />
@@ -67,6 +82,7 @@ class App extends Component {
           <div className="controls__button"><Ionicon icon="md-leaf" {...ioniconProps} /></div>
           <div className="controls__button"><Ionicon icon="md-cog" {...ioniconProps} /></div>
         </div>
+        */}
       </div>
     )
   }

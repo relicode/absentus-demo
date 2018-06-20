@@ -1,4 +1,5 @@
 @import './reset.css';
+@import './burger-menu.css';
 
 body {
   background-color: #eeeeee;
@@ -27,7 +28,7 @@ body {
 
 .map {
   & > div {
-    height: 300px;
+    height: 600px;
     text-align: center;
   }
 }
