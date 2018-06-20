@@ -61,6 +61,11 @@ class App extends Component {
             <li>Task #1</li>
           </ul>
         </Modal>
+        <div className="customBar" style={{
+          height: '150px',
+          backgroundImage: 'url("http://via.placeholder.com/350x150")',
+          backgroundSize: '100% 100%'
+        }} />
         <div className="map">
           <CemeteryMap />
         </div>
