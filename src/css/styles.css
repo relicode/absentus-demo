@@ -17,3 +17,7 @@ body {
   }
 }
 
+.leaflet-container {
+  background: #d2dcbe;
+}
+

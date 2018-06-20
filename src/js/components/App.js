@@ -33,12 +33,15 @@ class App extends Component {
   }
 
   render() {
-    const ioniconProps = { fontSize: '1.15em' }
+    const ioniconProps = {
+      color: 'gray',
+      fontSize: '1.15em',
+    }
     return (
       <div className="app">
         <Menu right>
-          <p onClick={this.toggleMapFilter}><Ionicon icon="md-funnel" {...ioniconProps} />&nbsp;Filter plots</p>
-          <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} />&nbsp;Return to center</p>
+          <p onClick={this.toggleMapFilter}><Ionicon icon="md-build" {...ioniconProps} /> Plots with tasks</p>
+          <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} /> Return to center</p>
           <p>Item 3</p>
           <p>Item 4</p>
           <p>Item 5</p>
