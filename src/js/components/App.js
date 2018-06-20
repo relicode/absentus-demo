@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
+import Menu from './Menu'
 import { MAP_FILTER, MODAL_TOGGLE, SET_LOCATION_ORIGINAL } from '../actions/types'
 
 
@@ -28,9 +29,17 @@ class App extends Component {
   }
 
   render() {
-    const ioniconProps = { fontSize: '75px' }
+    const ioniconProps = { fontSize: '1.15em' }
     return (
       <div className="app">
+        <Menu right>
+          <p onClick={this.toggleMapFilter}><Ionicon icon="md-funnel" {...ioniconProps} />&nbsp;Filter plots</p>
+          <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} />&nbsp;Return to center</p>
+          <p>Item 3</p>
+          <p>Item 4</p>
+          <p>Item 5</p>
+          <p>Item 6</p>
+        </Menu>
         <Modal open={this.props.showModal} onClose={this.handleCloseModal} center>
           <h1>&nbsp;</h1>
           <h2>Simple centered modal</h2>
@@ -52,20 +61,13 @@ class App extends Component {
             <li>Task #1</li>
           </ul>
         </Modal>
+        <div className="customBar" style={{
+          height: '150px',
+          backgroundImage: 'url("http://via.placeholder.com/350x150")',
+          backgroundSize: '100% 100%'
+        }} />
         <div className="map">
           <CemeteryMap />
-        </div>
-        <div className="controls">
-          <div className="controls__button" onClick={this.backToSquareOne}>
-            <Ionicon icon="md-pin" {...ioniconProps} />
-          </div>
-          <div className="controls__button"><Ionicon icon="md-calendar" {...ioniconProps} /></div>
-          <div className="controls__button" onClick={this.toggleMapFilter}>
-            <Ionicon icon="md-funnel" {...ioniconProps} />
-          </div>
-          <div className="controls__button"><Ionicon icon="md-search" {...ioniconProps} /></div>
-          <div className="controls__button"><Ionicon icon="md-leaf" {...ioniconProps} /></div>
-          <div className="controls__button"><Ionicon icon="md-cog" {...ioniconProps} /></div>
         </div>
       </div>
     )

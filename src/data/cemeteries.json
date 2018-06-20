@@ -21,6 +21,7 @@
               24.91804897785187
             ]
           ],
+          "tasks": [],
           "plots": {
             "1": {
               "location": [
@@ -121,8 +122,7 @@
               "resident": "Jeppe Salonius",
               "tasks": []
             }
-          },
-          "tasks": []
+          }
         },
         "7": {
           "positions": [
@@ -143,6 +143,7 @@
               24.918107986450195
             ]
           ],
+          "tasks": [],
           "plots": [
             {
               "plotNr": 1,
@@ -245,8 +246,7 @@
               "resident": "Laila Jussilainen",
               "tasks": []
             }
-          ],
-          "tasks": []
+          ]
         },
         "11": {
           "positions": [
@@ -299,8 +299,8 @@
               24.919014573097233
             ]
           ],
-          "plots": [],
-          "tasks": []
+          "tasks": [],
+          "plots": []
         }
       }
     }
