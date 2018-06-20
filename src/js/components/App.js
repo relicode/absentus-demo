@@ -19,10 +19,10 @@ class App extends Component {
     })
   }
 
-  handleCloseModal = () => {
+  toggleModal = (openOrClose) => {
     this.props.dispatch({
       type: MODAL_TOGGLE,
-      visible: false,
+      visible: openOrClose,
     })
   }
 
@@ -39,15 +39,19 @@ class App extends Component {
     }
     return (
       <div className="app">
-        <Menu right>
+        <Menu right >
           <p onClick={this.toggleMapFilter}><Ionicon icon="md-build" {...ioniconProps} /> Plots with tasks</p>
           <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} /> Return to center</p>
-          <p>Item 3</p>
+          <p onClick={this.toggleModal.bind(this, true)}><Ionicon icon="md-search" {...ioniconProps} /> Search for a grave</p>
           <p>Item 4</p>
           <p>Item 5</p>
           <p>Item 6</p>
         </Menu>
-        <Modal open={this.props.showModal} onClose={this.handleCloseModal} center>
+        <Modal classNames={{overlay: 'modal-zindex'}}
+          open={this.props.showModal}
+          onClose={this.toggleModal.bind(this, false)}
+          center
+        >
           <h1>&nbsp;</h1>
           <h2>Simple centered modal</h2>
           <h2>Simple centered modal</h2>
