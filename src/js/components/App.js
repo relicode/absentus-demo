@@ -5,20 +5,24 @@ import { connect } from 'react-redux'
 import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
 import Menu from './Menu'
-import { MAP_FILTER, MODAL_TOGGLE, SET_LOCATION_ORIGINAL } from '../actions/types'
+import {
+  MAP_FILTER,
+  MAP_SET_LOCATION_ORIGINAL,
+  MODAL_TOGGLE
+} from '../actions/types'
 
 
 class App extends Component {
   backToSquareOne = () => {
     this.props.dispatch({
-      type: SET_LOCATION_ORIGINAL,
+      type: MAP_SET_LOCATION_ORIGINAL,
     })
   }
 
-  handleCloseModal = () => {
+  toggleModal = (openOrClose) => {
     this.props.dispatch({
       type: MODAL_TOGGLE,
-      visible: false,
+      visible: openOrClose,
     })
   }
 
@@ -29,18 +33,25 @@ class App extends Component {
   }
 
   render() {
-    const ioniconProps = { fontSize: '1.15em' }
+    const ioniconProps = {
+      color: 'gray',
+      fontSize: '1.15em',
+    }
     return (
       <div className="app">
-        <Menu right>
-          <p onClick={this.toggleMapFilter}><Ionicon icon="md-funnel" {...ioniconProps} />&nbsp;Filter plots</p>
-          <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} />&nbsp;Return to center</p>
-          <p>Item 3</p>
+        <Menu right >
+          <p onClick={this.toggleMapFilter}><Ionicon icon="md-build" {...ioniconProps} /> Plots with tasks</p>
+          <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} /> Return to center</p>
+          <p onClick={this.toggleModal.bind(this, true)}><Ionicon icon="md-search" {...ioniconProps} /> Search for a grave</p>
           <p>Item 4</p>
           <p>Item 5</p>
           <p>Item 6</p>
         </Menu>
-        <Modal open={this.props.showModal} onClose={this.handleCloseModal} center>
+        <Modal classNames={{overlay: 'modal-zindex'}}
+          open={this.props.showModal}
+          onClose={this.toggleModal.bind(this, false)}
+          center
+        >
           <h1>&nbsp;</h1>
           <h2>Simple centered modal</h2>
           <h2>Simple centered modal</h2>

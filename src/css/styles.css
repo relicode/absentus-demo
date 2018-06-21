@@ -17,3 +17,11 @@ body {
   }
 }
 
+.modal-zindex {
+  z-index: 12345;
+}
+
+.leaflet-container {
+  background: #d2dcbe;
+}
+

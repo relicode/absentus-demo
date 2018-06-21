@@ -4,13 +4,18 @@ import { connect } from 'react-redux'
 
 import Block from '../utils/block'
 import Plot from '../utils/plot'
-// import { MODAL_TOGGLE } from '../actions/types'
+import { MAP_SET_ZOOM_LEVEL } from '../actions/types'
 
 
-const colors = ['green', 'red', 'yellow']
-const getRandomColor = () => (
-  colors[Math.floor(Math.random() * colors.length)]
-)
+const getBlockColor = (block) => {
+  if (block.tasks.filter((task) => task.urgent).length) {
+    return 'red'
+  }
+  if (block.tasks.length) {
+    return 'yellow'
+  }
+  return 'green'
+}
 
 class CemeteryMap extends Component {
   handleClick = (ev) => {
@@ -23,20 +28,22 @@ class CemeteryMap extends Component {
     return this.props.blocks.map((block) => (
       <Polygon
         positions={block.positions}
-        color={getRandomColor()} key={block.blockNr}
-        onClick={() => {
-          /*
-          this.props.dispatch({
-            type: MODAL_TOGGLE,
-            visible: true,
-          })
-          */
-        }}
-      />
+        color={getBlockColor(block)} key={block.blockNr}
+        onClick={() => null}
+      >
+        {block.tasks.length ? (
+          <Popup>
+            {block.tasks.map((task) => (
+              <p key={task.type}>{task.type}</p>
+            ))}
+          </Popup>
+        ) : null}
+      </Polygon>
     ))
   }
 
   renderPlots() {
+    if (this.props.map.zoom <= 18) return null
     if (this.props.mapFilter === 'PLOT_WITH_TASKS') {
       return Object.entries(this.props.plots).map((plot) => (
         plot[1].tasks.length ? (
@@ -78,7 +85,12 @@ class CemeteryMap extends Component {
       <Map
         center={position}
         onClick={this.handleClick}
-        viewport={{}}
+        onZoomend={(ev) => {
+          this.props.dispatch({
+            type: MAP_SET_ZOOM_LEVEL,
+            zoomLevel: ev.target._zoom,
+          })
+        }}
         {...this.props.map}
       >
         <TileLayer
@@ -105,6 +117,7 @@ const mapStateToProps = (state /*, ownProps */) => {
     new Block({
       country, city, cemetery,
       positions: block[1].positions,
+      tasks: block[1].tasks,
       blockNr: block[0],
     })
   ))

@@ -143,7 +143,12 @@
               24.918107986450195
             ]
           ],
-          "tasks": [],
+          "tasks": [
+            {
+              "type": "WATER_PLANTS",
+              "urgent": true
+            }
+          ],
           "plots": [
             {
               "plotNr": 1,
@@ -162,7 +167,7 @@
                 24.91826593313929
               ],
               "notes": "",
-              "resident": "Jupe the Kallonmurskaaja",
+              "resident": "Laila Kivikko",
               "tasks": [
                 "ADJUST_HEADSTONE"
               ]
@@ -299,7 +304,11 @@
               24.919014573097233
             ]
           ],
-          "tasks": [],
+          "tasks": [
+            {
+              "type": "WATER_PLANTS"
+            }
+          ],
           "plots": []
         }
       }
