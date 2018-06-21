@@ -29,15 +29,16 @@ class CemeteryMap extends Component {
       <Polygon
         positions={block.positions}
         color={getBlockColor(block)} key={block.blockNr}
-        onClick={() => {
-          /*
-          this.props.dispatch({
-            type: MODAL_TOGGLE,
-            visible: true,
-          })
-          */
-        }}
-      />
+        onClick={() => null}
+      >
+        {block.tasks.length ? (
+          <Popup>
+            {block.tasks.map((task) => (
+              <p key={task.type}>{task.type}</p>
+            ))}
+          </Popup>
+        ) : null}
+      </Polygon>
     ))
   }
 
@@ -116,6 +117,7 @@ const mapStateToProps = (state /*, ownProps */) => {
     new Block({
       country, city, cemetery,
       positions: block[1].positions,
+      tasks: block[1].tasks,
       blockNr: block[0],
     })
   ))
