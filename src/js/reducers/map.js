@@ -8,9 +8,10 @@ import {
 const initialLat = 60.16880318693753 // Hietaniemi Cemetery
 const initialLon = 24.91838931960289 // Hietaniemi Cemetery
 const initialZoom = 18
+const accessToken = process.env.MAP_ACCESS_TOKEN
 
 const initialState = {
-  accessToken: 'pk.eyJ1IjoiYW5zc2loZXJyYW5lbiIsImEiOiJjamkxand2dG8wbG9uM3FwaWtzMmcweXF4In0.wMtJBkK3g1ZuSzg7gaXPDw',
+  accessToken,
   lat: initialLat,
   lon: initialLon,
   maxNativeZoom: 18,
