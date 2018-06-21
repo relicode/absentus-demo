@@ -54,7 +54,7 @@ export default class Plot {
   tasks = []
   taskCounter = 0
 
-  constructor({ block, plotNr, location, notes = [], resident = null, tasks = [] }) {
+  constructor({ block, plotNr, location, notes = [], residents = [], tasks = [] }) {
     if (!(block) || !plotNr || !(Array.isArray(location))) {
       throw new Error('Block, plotNr and location are required.')
     }
@@ -62,7 +62,7 @@ export default class Plot {
     this.plotNr = plotNr
     this.location = location
     this.notes = notes
-    this.resident = resident
+    this.residents = residents
     this.tasks = tasks
   }
 
