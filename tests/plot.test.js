@@ -6,7 +6,7 @@ const block = new Block({
   country: 'finland',
   city: 'helsinki',
   cemetery: 'hietaniemi',
-  coordinates: [
+  positions: [
     [60.16874554734086, 24.918044068116334],
     [60.16890565784961, 24.918092359309178],
     [60.16889765234272, 24.91822113582339],
