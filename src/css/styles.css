@@ -1,8 +1,10 @@
-@import './reset.css';
 @import './burger-menu.css';
+@import './reset.css';
+@import url('https://fonts.googleapis.com/css?family=Karla');
 
 body {
   background-color: #eeeeee;
+  font-family: 'Karla', sans-serif;
 }
 
 .app {
@@ -12,8 +14,10 @@ body {
 
 .map {
   & > div {
-    height: 600px;
+    height: 550px;
     text-align: center;
+    width: 90%;
+    margin-left: 5%;
   }
 }
 
