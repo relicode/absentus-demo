@@ -9,3 +9,7 @@ Promotional Smart Cemetery demo for absentus.com
 ## Installation
 
 Run `yarn`. For development run `yarn dev` and for building a production build run `yarn build`.
+
+## Setup
+
+Set appropriate environment variables in .env file at the root of the project.
