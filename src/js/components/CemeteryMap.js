@@ -52,7 +52,9 @@ class CemeteryMap extends Component {
             key={String(plot[1].block) + String(plot[1].plotNr)}
           >
             <Popup>
-              {plot[1].resident}
+              {plot[1].residents.map((resident, index) => (
+                <p key={index}>{resident}</p>
+              ))}
               {plot[1].tasks.map((task) => (
                 <p key={task}>{task}</p>
               ))}
@@ -66,9 +68,11 @@ class CemeteryMap extends Component {
         position={[plot[1].location[0], plot[1].location[1]]}
         key={String(plot[1].block) + String(plot[1].plotNr)}
       >
-        { plot[1].resident || plot[1].tasks.length ? (
+        { plot[1].residents || plot[1].tasks.length ? (
           <Popup>
-            {plot[1].resident}
+            {plot[1].residents.map((resident, index) => (
+              <p key={index}>{resident}</p>
+            ))}
             {plot[1].tasks.map((task) => (
               <p key={task}>{task}</p>
             ))}
