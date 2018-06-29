@@ -14,8 +14,10 @@ body {
 
 .map {
   & > div {
-    height: 600px;
+    height: 550px;
     text-align: center;
+    width: 90%;
+    margin-left: 5%;
   }
 }
 
