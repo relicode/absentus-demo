@@ -43,9 +43,19 @@ class CemeteryMap extends Component {
   }
 
   renderPlots() {
+    const { nameFilter } = this.props.mapFilter
+    let plotsToRender = this.props.plots
     if (this.props.map.zoom <= 18) return null
+    if (this.props.mapFilter.nameFilter) {
+      plotsToRender = plotsToRender.filter((p) => (
+        p.residents.filter((r) => (
+          new RegExp(nameFilter, 'i', 'g').test(r)
+        )).length
+      ))
+    }
+    console.log(plotsToRender)
     if (this.props.mapFilter.tagFilters.includes('PLOT_WITH_TASKS')) {
-      return Object.entries(this.props.plots).map((plot) => (
+      return Object.entries(plotsToRender).map((plot) => (
         plot[1].tasks.length ? (
           <Marker
             position={[plot[1].location[0], plot[1].location[1]]}

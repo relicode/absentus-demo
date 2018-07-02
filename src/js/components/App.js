@@ -12,7 +12,7 @@ import {
 } from '../actions/types'
 
 
-const NAME_FILTER = 'nameFilter'
+const NAME_FILTER_MODAL = 'nameFilter'
 
 class App extends Component {
   backToSquareOne = () => {
@@ -46,12 +46,17 @@ class App extends Component {
         <Menu right >
           <p onClick={this.toggleMapFilter}><Ionicon icon="md-build" {...ioniconProps} /> Plots with tasks</p>
           <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} /> Return to center</p>
-          <p onClick={this.toggleModal.bind(this, NAME_FILTER, true)}><Ionicon icon="md-search" {...ioniconProps} /> Search for a grave</p>
+          <p onClick={this.toggleModal.bind(this, NAME_FILTER_MODAL, true)}><Ionicon icon="md-search" {...ioniconProps} /> Search for a grave</p>
           <p>Item 4</p>
           <p>Item 5</p>
           <p>Item 6</p>
         </Menu>
-        <NameFilterModal open={this.props.showNameFilterModal} closeModal={this.toggleModal.bind(this, NAME_FILTER, false)} />
+        <NameFilterModal
+          open={this.props.showNameFilterModal}
+          closeModal={this.toggleModal.bind(this, NAME_FILTER_MODAL, false)}
+          dispatch={this.props.dispatch}
+          nameFilter={this.props.nameFilter}
+        />
         <div className="customBar" style={{
           height: '150px',
           backgroundImage: 'url("http://via.placeholder.com/350x150")',
@@ -66,6 +71,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state/*, ownProps*/) => ({
+  nameFilter: state.mapFilter.nameFilter,
   showNameFilterModal: state.modal.nameFilter,
 })
 
