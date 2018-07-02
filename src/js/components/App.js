@@ -6,7 +6,7 @@ import CemeteryMap from './CemeteryMap'
 import Ionicon from 'react-ionicons'
 import Menu from './Menu'
 import {
-  MAP_FILTER,
+  MAP_TOGGLE_TAG_FILTER,
   MAP_SET_LOCATION_ORIGINAL,
   MODAL_TOGGLE
 } from '../actions/types'
@@ -31,7 +31,8 @@ class App extends Component {
 
   toggleMapFilter= () => {
     this.props.dispatch({
-      type: MAP_FILTER,
+      type: MAP_TOGGLE_TAG_FILTER,
+      tagFilter: 'PLOT_WITH_TASKS',
     })
   }
 

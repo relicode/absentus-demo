@@ -1,14 +1,20 @@
-import { MAP_FILTER } from '../actions/types'
+import { MAP_TOGGLE_TAG_FILTER } from '../actions/types'
 
 
-const PLOT_WITH_TASKS = 'PLOT_WITH_TASKS'
-
-const initialState = null
+export const initialState = {
+  tagFilters: [],
+  nameFilter: '',
+}
 
 export default function mapFilter(state = initialState, action) {
-  switch (action.type) {
-    case MAP_FILTER:
-      return state === null ? PLOT_WITH_TASKS : null
+  const { type, tagFilter } = action
+  switch (type) {
+    case MAP_TOGGLE_TAG_FILTER:
+      return (
+        state.tagFilters.includes(tagFilter) ?
+          {...state, tagFilters: state.tagFilters.filter((f) => f !== tagFilter)} :
+          {...state, tagFilters: [...state.tagFilters, tagFilter]}
+      )
     default:
       return state
   }

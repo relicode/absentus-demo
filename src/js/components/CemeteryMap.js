@@ -44,7 +44,7 @@ class CemeteryMap extends Component {
 
   renderPlots() {
     if (this.props.map.zoom <= 18) return null
-    if (this.props.mapFilter === 'PLOT_WITH_TASKS') {
+    if (this.props.mapFilter.tagFilters.includes('PLOT_WITH_TASKS')) {
       return Object.entries(this.props.plots).map((plot) => (
         plot[1].tasks.length ? (
           <Marker
