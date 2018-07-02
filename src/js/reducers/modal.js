@@ -1,13 +1,13 @@
 import { MODAL_TOGGLE } from '../actions/types'
 
 
-const initialState = {
+export const initialState = {
   nameFilter: false,
 }
 
 export default function modal(state = initialState, action) {
-  const visible = typeof action.visible === 'boolean' ? action.visible : !state.visible
   const { type, name } = action
+  const visible = typeof action.visible === 'boolean' ? action.visible : !state[name]
   const newState = {...state}
   switch (type) {
     case MODAL_TOGGLE:
