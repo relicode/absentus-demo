@@ -12,12 +12,15 @@ const NameFilterModal = (props) => (
   >
     <h1>&nbsp;</h1>
     <h2>Search graves</h2>
-    <input onChange={(ev) => (
-      props.dispatch({
-        type: MAP_SET_NAME_FILTER,
-        nameFilter: ev.target.value,
-      })
-    )}/>
+    <input
+      value={props.nameFilter}
+      onChange={(ev) => (
+        props.dispatch({
+          type: MAP_SET_NAME_FILTER,
+          nameFilter: ev.target.value,
+        })
+      )}
+    />
     <ul>
       <li>Task #1</li>
     </ul>
