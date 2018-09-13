@@ -1,7 +1,10 @@
+@import './burger-menu.css';
 @import './reset.css';
+@import url('https://fonts.googleapis.com/css?family=Karla');
 
 body {
   background-color: #eeeeee;
+  font-family: 'Karla', sans-serif;
 }
 
 .app {
@@ -9,28 +12,20 @@ body {
   flex-direction: column;
 }
 
-.controls {
-  display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-top: 1em;
-  &__button {
-    lost-column: 1/3;
-    cursor: pointer;
-    height: 100px;
-    /* pointer-events: none; */
+.map {
+  & > div {
+    height: 550px;
     text-align: center;
-    &:hover {
-      background-color: #dddddd;
-    }
+    width: 90%;
+    margin-left: 5%;
   }
 }
 
-.map {
-  & > div {
-    height: 300px;
-    text-align: center;
-  }
+.modal-zindex {
+  z-index: 12345;
+}
+
+.leaflet-container {
+  background: #d2dcbe;
 }
 
