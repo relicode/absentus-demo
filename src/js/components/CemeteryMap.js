@@ -3,8 +3,8 @@ import { Circle, Map, Marker, Polygon, Popup, TileLayer } from 'react-leaflet'
 import { connect } from 'react-redux'
 
 import Block from '../utils/block'
-import Plot from '../utils/plot'
 import { MAP_SET_ZOOM_LEVEL } from '../actions/types'
+import { plotsSelector } from '../selectors/CemeteryMap'
 
 
 const getBlockColor = (block) => {
@@ -43,19 +43,19 @@ class CemeteryMap extends Component {
   }
 
   renderPlots() {
-    if (this.props.map.zoom <= 18) return null
-    if (this.props.mapFilter === 'PLOT_WITH_TASKS') {
-      return Object.entries(this.props.plots).map((plot) => (
-        plot[1].tasks.length ? (
+    const plots = this.props.plots // eslint gives error with destructor
+    if (this.props.mapFilter.tagFilters.includes('PLOT_WITH_TASKS')) {
+      return plots.map((plot) => (
+        plot.tasks.length ? (
           <Marker
-            position={[plot[1].location[0], plot[1].location[1]]}
-            key={String(plot[1].block) + String(plot[1].plotNr)}
+            position={[plot.location[0], plot.location[1]]}
+            key={String(plot.block) + String(plot.plotNr)}
           >
             <Popup>
-              {plot[1].residents.map((resident, index) => (
+              {plot.residents.map((resident, index) => (
                 <p key={index}>{resident}</p>
               ))}
-              {plot[1].tasks.map((task) => (
+              {plot.tasks.map((task) => (
                 <p key={task}>{task}</p>
               ))}
             </Popup>
@@ -63,17 +63,17 @@ class CemeteryMap extends Component {
         ) : null
       ))
     }
-    return Object.entries(this.props.plots).map((plot) => (
+    return plots.map((plot) => (
       <Marker
-        position={[plot[1].location[0], plot[1].location[1]]}
-        key={String(plot[1].block) + String(plot[1].plotNr)}
+        position={[plot.location[0], plot.location[1]]}
+        key={String(plot.block) + String(plot.plotNr)}
       >
-        { plot[1].residents || plot[1].tasks.length ? (
+        { plot.residents || plot.tasks.length ? (
           <Popup>
-            {plot[1].residents.map((resident, index) => (
+            {plot.residents.map((resident, index) => (
               <p key={index}>{resident}</p>
             ))}
-            {plot[1].tasks.map((task) => (
+            {plot.tasks.map((task) => (
               <p key={task}>{task}</p>
             ))}
           </Popup>
@@ -117,6 +117,8 @@ class CemeteryMap extends Component {
 
 const mapStateToProps = (state /*, ownProps */) => {
   const { country, city, cemetery } = state.chosenCemetery
+  const { map, mapFilter } = state
+
   const blocks = Object.entries(state.cemeteries[country][city][cemetery]).map((block) => (
     new Block({
       country, city, cemetery,
@@ -125,21 +127,12 @@ const mapStateToProps = (state /*, ownProps */) => {
       blockNr: block[0],
     })
   ))
-  const plots = Object.entries(state.cemeteries[country][city][cemetery]).map((block) => (
-    Object.entries(block[1].plots).map((plot) => {
-      return new Plot({
-        ...plot[1],
-        plotNr: plot[0],
-        block: block[0],
-      })
-    })
-  )).reduce((prev, curr) => (
-    prev.concat(curr)
-  ))
+
+  const plots = plotsSelector(state)
 
   return {
-    map: state.map,
-    mapFilter: state.mapFilter,
+    map,
+    mapFilter,
     blocks,
     plots,
   }

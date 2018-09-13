@@ -1,6 +1,3 @@
-import Task from './task'
-
-
 const COUNTRY = 'country'
 const CITY = 'city'
 const CEMETERY = 'cemetery'

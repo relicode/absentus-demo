@@ -1,77 +1,33 @@
-import Modal from 'react-responsive-modal'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import CemeteryMap from './CemeteryMap'
-import Ionicon from 'react-ionicons'
 import Menu from './Menu'
-import {
-  MAP_FILTER,
-  MAP_SET_LOCATION_ORIGINAL,
-  MODAL_TOGGLE
-} from '../actions/types'
+import NameFilterModal from './NameFilterModal.js'
+import { MODAL_TOGGLE } from '../actions/types'
 
+
+const NAME_FILTER_MODAL = 'nameFilter'
 
 class App extends Component {
-  backToSquareOne = () => {
-    this.props.dispatch({
-      type: MAP_SET_LOCATION_ORIGINAL,
-    })
-  }
-
-  toggleModal = (openOrClose) => {
+  toggleModal = (name, visible) => {
     this.props.dispatch({
       type: MODAL_TOGGLE,
-      visible: openOrClose,
-    })
-  }
-
-  toggleMapFilter= () => {
-    this.props.dispatch({
-      type: MAP_FILTER,
+      name,
+      visible,
     })
   }
 
   render() {
-    const ioniconProps = {
-      color: 'gray',
-      fontSize: '1.15em',
-    }
     return (
       <div className="app">
-        <Menu right >
-          <p onClick={this.toggleMapFilter}><Ionicon icon="md-build" {...ioniconProps} /> Plots with tasks</p>
-          <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} /> Return to center</p>
-          <p onClick={this.toggleModal.bind(this, true)}><Ionicon icon="md-search" {...ioniconProps} /> Search for a grave</p>
-          <p>Item 4</p>
-          <p>Item 5</p>
-          <p>Item 6</p>
-        </Menu>
-        <Modal classNames={{overlay: 'modal-zindex'}}
-          open={this.props.showModal}
-          onClose={this.toggleModal.bind(this, false)}
-          center
-        >
-          <h1>&nbsp;</h1>
-          <h2>Simple centered modal</h2>
-          <h2>Simple centered modal</h2>
-          <h2>Simple centered modal</h2>
-          <h2>Simple centered modal</h2>
-          <h2>Simple centered modal</h2>
-          <h2>Simple centered modal</h2>
-          <h2>Simple centered modal</h2>
-          <h2>Simple centered modal</h2>
-          <ul>
-            <li>Task #1</li>
-            <li>Task #1</li>
-            <li>Task #1</li>
-            <li>Task #1</li>
-            <li>Task #1</li>
-            <li>Task #1</li>
-            <li>Task #1</li>
-            <li>Task #1</li>
-          </ul>
-        </Modal>
+        <Menu />
+        <NameFilterModal
+          open={this.props.showNameFilterModal}
+          closeModal={this.toggleModal.bind(this, NAME_FILTER_MODAL, false)}
+          dispatch={this.props.dispatch}
+          nameFilter={this.props.nameFilter}
+        />
         <div className="customBar" style={{
           height: '150px',
           backgroundImage: 'url("http://via.placeholder.com/350x150")',
@@ -86,7 +42,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state/*, ownProps*/) => ({
-  showModal: state.modal.visible,
+  nameFilter: state.mapFilter.nameFilter,
+  showNameFilterModal: state.modal.nameFilter,
 })
 
 const mapDispatchToProps = (dispatch) => ({

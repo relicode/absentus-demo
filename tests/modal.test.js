@@ -1,18 +1,24 @@
-import modalReducer from '../src/js/reducers/modal.js'
+import modalReducer, { initialState } from '../src/js/reducers/modal.js'
 import { MODAL_TOGGLE } from '../src/js/actions/types.js'
 
 
 test('Toggling modal changes state', () => {
-  const initialState = modalReducer(undefined, {})
-  expect(initialState.visible).toBe(false)
+  const MODAL_NAME = 'nameFilter'
 
-  const toggledState = modalReducer(initialState, { type: MODAL_TOGGLE })
-  expect(toggledState.visible).toBe(true)
+  const firstState = modalReducer(undefined, initialState)
+  expect(firstState.nameFilter).toBe(false)
 
-  const moreToggledState = modalReducer(toggledState, { type: MODAL_TOGGLE })
-  expect(moreToggledState.visible).toBe(false)
+  const toggledState = modalReducer(firstState, { type: MODAL_TOGGLE, name: MODAL_NAME })
+  expect(toggledState.nameFilter).toBe(true)
 
-  const evenMoreToggledState = modalReducer(moreToggledState, { type: MODAL_TOGGLE, visible: false })
-  expect(evenMoreToggledState.visible).toBe(false)
+  const moreToggledState = modalReducer(toggledState, { type: MODAL_TOGGLE, name: MODAL_NAME })
+  expect(moreToggledState.nameFilter).toBe(false)
+
+  const evenMoreToggledState = modalReducer(moreToggledState, {
+    name: MODAL_NAME,
+    type: MODAL_TOGGLE,
+    visible: false,
+  })
+  expect(evenMoreToggledState.nameFilter).toBe(false)
 })
 
