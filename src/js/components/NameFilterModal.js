@@ -12,6 +12,7 @@ const NameFilterModal = (props) => (
   >
     <h1>&nbsp;</h1>
     <h2>Search graves</h2>
+    <br />
     <input
       value={props.nameFilter}
       onChange={(ev) => (
@@ -21,9 +22,6 @@ const NameFilterModal = (props) => (
         })
       )}
     />
-    <ul>
-      <li>Task #1</li>
-    </ul>
   </Modal>
 )
 

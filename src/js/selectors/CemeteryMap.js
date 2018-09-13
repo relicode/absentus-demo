@@ -1,6 +1,8 @@
 import Plot from '../utils/plot'
 
 
+const PLOT_WITH_TASKS_FILTER = 'PLOT_WITH_TASKS'
+
 export const plotsSelector = (state) => {
   const { country, city, cemetery } = state.chosenCemetery
   const { map, mapFilter } = state
@@ -26,7 +28,7 @@ export const plotsSelector = (state) => {
     ))
   ) : plots
 
-  const plotsAfterTaskFiltering = tagFilters.includes('PLOT_WITH_TASKS') ? (
+  const plotsAfterTaskFiltering = tagFilters.includes(PLOT_WITH_TASKS_FILTER) ? (
     Object.entries(plotsAfterNameFiltering).map((plot) => (
       plot[1].tasks.length ? plot[1] : null
     )).filter(n => n) // Remove falsy (in this case, null) entries
