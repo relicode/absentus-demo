@@ -28,11 +28,7 @@ class App extends Component {
           dispatch={this.props.dispatch}
           nameFilter={this.props.nameFilter}
         />
-        <div className="customBar" style={{
-          height: '150px',
-          backgroundImage: 'url("http://via.placeholder.com/350x150")',
-          backgroundSize: '100% 100%'
-        }} />
+        <div className="custom-bar" />
         <div className="map">
           <CemeteryMap />
         </div>
