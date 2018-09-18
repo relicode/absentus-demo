@@ -51,6 +51,10 @@
     color: #373a47;
     background: #b8b7ad;
   }
+  & > svg { /* To align with menu text */
+    position: relative;
+    top: 4px;
+  }
 }
 
 /* Styling of overlay */
