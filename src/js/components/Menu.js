@@ -47,11 +47,11 @@ class Menu extends Component {
     return (
       <BurgerMenu right >
         <p onClick={this.toggleMapFilter}><Ionicon icon="md-build" {...ioniconProps} />
-          {this.props.tagFilters.includes(PLOT_WITH_TASKS_FILTER) ? ' All plots' : ' Plots with tasks'}
+          {this.props.tagFilters.includes(PLOT_WITH_TASKS_FILTER) ? ' Plots with tasks' : ' All plots'}
         </p>
         <p onClick={this.backToSquareOne}><Ionicon icon="md-pin" {...ioniconProps} /> Return to center</p>
         <p onClick={this.toggleModal.bind(this, NAME_FILTER_MODAL, true)}><Ionicon icon="md-search" {...ioniconProps} />
-          Search for a grave{this.props.nameFilter.length ? `: ${this.props.nameFilter}` : null}
+          &nbsp;Search{this.props.nameFilter.length ? `: ${this.props.nameFilter}` : null}
         </p>
         <p>Item 4</p>
         <p>Item 5</p>

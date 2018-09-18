@@ -10,8 +10,6 @@ const initialState = {
 export default function chosenCemetery(state = initialState, action) {
   const { type } = action
   switch (type) {
-    case 'xyzåäö':
-      return state
     default:
       return state
   }

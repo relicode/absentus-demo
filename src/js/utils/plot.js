@@ -8,14 +8,14 @@ const pad = (stringToPad, padType) => {
   switch (padType) {
     case COUNTRY:
       return String(stringToPad).padStart(3, '0') // 195 countries in the world
-    case 'city':
+    case CITY:
       return String(stringToPad).padStart(5, '0') // According to the U.S. Census Bureau, there are 19,354 "incorporated places" in the United States.
-    case 'cemetery':
-      return String(stringToPad).padStart(3, '0')    // Up to 1000 cemeteries per city
-    case 'block':
-      return String(stringToPad).padStart(4, '0')       // Up to 10000 blocks per cemetery
-    case 'plot':
-      return String(stringToPad).padStart(6, '0')        // Up to 1,000,000 plots per block
+    case CEMETERY:
+      return String(stringToPad).padStart(3, '0') // Up to 1000 cemeteries per city
+    case BLOCK:
+      return String(stringToPad).padStart(4, '0') // Up to 10000 blocks per cemetery
+    case PLOT:
+      return String(stringToPad).padStart(6, '0') // Up to 1,000,000 plots per block
     default:
       throw new Error('PadType is missing or invalid.')
   }
