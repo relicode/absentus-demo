@@ -7,6 +7,8 @@ import { MAP_SET_ZOOM_LEVEL } from '../actions/types'
 import { plotsSelector } from '../selectors/CemeteryMap'
 
 
+const UNOCCUPIED = 'UNOCCUPIED'
+
 const getBlockColor = (block) => {
   if (block.tasks.filter((task) => task.urgent).length) {
     return 'red'
@@ -52,9 +54,11 @@ class CemeteryMap extends Component {
             key={String(plot.block) + String(plot.plotNr)}
           >
             <Popup>
-              {plot.residents.map((resident, index) => (
-                <p key={index}>{resident}</p>
-              ))}
+              {plot.residents.length ? (
+                plot.residents.map((resident, index) => (
+                  <p key={index}>{resident}</p>
+                ))
+              ) : UNOCCUPIED}
               {plot.tasks.map((task) => (
                 <p key={task}>{task}</p>
               ))}
@@ -70,9 +74,11 @@ class CemeteryMap extends Component {
       >
         { plot.residents || plot.tasks.length ? (
           <Popup>
-            {plot.residents.map((resident, index) => (
-              <p key={index}>{resident}</p>
-            ))}
+            {plot.residents.length ? (
+              plot.residents.map((resident, index) => (
+                <p key={index}>{resident}</p>
+              ))
+            ) : UNOCCUPIED}
             {plot.tasks.map((task) => (
               <p key={task}>{task}</p>
             ))}

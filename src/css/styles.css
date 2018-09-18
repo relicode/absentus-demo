@@ -12,6 +12,12 @@ body {
   flex-direction: column;
 }
 
+.custom-bar {
+  height: 150px;
+  background-image: url('https://via.placeholder.com/350x150');
+  background-size: 100% 100%;
+}
+
 .map {
   & > div {
     height: 550px;
